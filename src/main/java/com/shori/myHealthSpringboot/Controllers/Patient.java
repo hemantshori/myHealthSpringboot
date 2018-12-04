@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.stereotype.Service;
 
-
+@Service
 @Entity
 
 public class Patient {

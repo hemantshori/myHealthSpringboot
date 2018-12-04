@@ -1,9 +1,14 @@
 <html>
 <head>
-<title>Login</title>
+<title>Welcome</title>
 </head>
 <body>
-<h1>Welcome ${message}</h1>
-    
+
+    <form action="/welcome" method="POST">
+    <h1>Patient ${firstName} added successfully</h1>
+    <button>"LogOut" </button>
+    <br>
+
+    </form>
 </body>
 </html>

@@ -3,24 +3,29 @@ package com.shori.myHealthSpringboot.Controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.shori.myHealthSpringboot.repository.DBRepository;
 import com.shori.myHealthSpringboot.resource.UserResource;
+
+import ch.qos.logback.classic.net.SyslogAppender;
+
+import java.io.Console;
 import java.util.List;
 
-//@Controller
+@Controller
 public class WelcomeController {
 
 	@Autowired
 	LoginBusinessRules loginBusinessRules;
 	@Autowired
 	DBRepository dbRepository;
-	
-	@Autowired
-	Patient patient;
+
 
 	@RequestMapping("/login")
 	public String loginPage() {
@@ -42,14 +47,28 @@ public class WelcomeController {
 	}
 	
 	
+	// capture details from page and save it to DB
 	
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<Patient> getList(@RequestParam String name, @RequestParam String password, ModelMap model) {
+	@RequestMapping(value = "/patientDetails", method = RequestMethod.POST)
+	public String getDataFromPage(@RequestParam String firstName, @RequestParam String lastName, 
+			@RequestParam String phone,
+			@RequestParam String address, ModelMap model) {
+		
+		
+		model.put("firstName", firstName);
+		model.put("lastName", lastName);
+		model.put("address", address);
+		model.put("phone", phone);
+		
 
-	      List<Patient> xx = dbRepository.findAll();
+		return "welcome";
+	}
 
-	      return xx;
-	
+	@RequestMapping(value = "/welcome", method = RequestMethod.POST)
+	public String handleUserLogin(){
+     
+		
+		return "login";
 	}
 }
 
