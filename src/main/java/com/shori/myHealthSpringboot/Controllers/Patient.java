@@ -3,11 +3,10 @@ package com.shori.myHealthSpringboot.Controllers;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-import org.springframework.boot.autoconfigure.domain.EntityScan;
+import javax.persistence.Id;
+
+
 import org.springframework.stereotype.Service;
 
 @Service
@@ -26,8 +25,21 @@ public class Patient {
 	@Column(name = "phone")
 	private String phone;
 	public Patient() {
+		
 
 	}
+
+
+
+	public Patient(Integer id, String firstName, String lastName, String phone) {
+		super();
+		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.phone = phone;
+	}
+
+
 
 	public Integer getId() {
 		return id;

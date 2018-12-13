@@ -1,6 +1,8 @@
 package com.shori.myHealthSpringboot.Controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +18,9 @@ public class DBController {
 
 	@Autowired
 	DBRepository dbRepository;
+	@Autowired
+	Patient patient;
+
 
 	
 	@GetMapping(value= "/all")
@@ -37,12 +42,26 @@ public class DBController {
 	}
 	
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public List<Patient> getList(@RequestParam String name, @RequestParam String password, ModelMap model) {
+	public List<Patient> getList() {
 
 	      List<Patient> xx = dbRepository.findAll();
 
 	      return xx;
 	
 	}
+	
+	
+	// save to DB..
+	@PostMapping(value = "/createPatent")
+	public Patient createAndSavePatient(Patient patient) {
+		
+		System.out.println("iam saving patient");
+		
+		return dbRepository.save(patient);
+		
+	}
+	
+
+
 }
 
